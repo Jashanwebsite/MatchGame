@@ -49,7 +49,7 @@ const Component = () => {
   const firstClick = (item) => {
     if (!firstval) {
       dispatch(first(item));
-      // document.querySelector(`.t${item}`).classList.toggle("text-transparent");
+      document.querySelector(`.t${item}`).classList.toggle("text-transparent");
       document.querySelector(`.t${item}`).classList.toggle("shadow-css");
       document.querySelector(`.t${item}`).classList.add("text-[#def2f1]");
     } else {
