@@ -5,14 +5,11 @@ import Enterance from './Enterance'
 import {BrowserRouter , Route,Routes} from 'react-router-dom'
 const Content = () => {
   return (
-    <div className='content w-full bg-[#212121] '>
+    <div className='content w-full h-screen bg-[#eae7dc] '>
       <BrowserRouter>
       <Routes>
         <Route element={ <Enterance />} path='/'></Route>
          <Route element={  <Header></Header>} path='/game'></Route>
-         {/* <Route element={} path='/game'></Route> */}
-    
-      {/* <Component></Component> */}
 
       </Routes>
       </BrowserRouter>

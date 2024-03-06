@@ -14,7 +14,7 @@ const Component = () => {
   // }, [firstval, secondval, reducer]);
   const [array, setArray] = useState([]);
   const [array2, setArray2] = useState([]);
- const [isMounted, setIsMounted] = useState(true);
+  const [isMounted, setIsMounted] = useState(true);
   useEffect(() => {
     const newArray = [];
     const newArray2 = [];
@@ -49,8 +49,9 @@ const Component = () => {
   const firstClick = (item) => {
     if (!firstval) {
       dispatch(first(item));
-      document.querySelector(`.t${item}`).classList.toggle("text-transparent");
+      // document.querySelector(`.t${item}`).classList.toggle("text-transparent");
       document.querySelector(`.t${item}`).classList.toggle("shadow-css");
+      document.querySelector(`.t${item}`).classList.add("text-[#def2f1]");
     } else {
       alert("please selcet form second one");
     }
@@ -58,7 +59,8 @@ const Component = () => {
   useEffect(() => {
     if (!isMounted) {
       return; // Avoid updating state after unmounting
-    }})
+    }
+  });
   const secondclick = (item) => {
     if (!secondval) {
       console.log("message second click");
@@ -66,6 +68,7 @@ const Component = () => {
       // document.querySelector(`.r${item}`).classList.remove("text-transparent");
       document.querySelector(`.r${item}`).classList.toggle("text-transparent");
       document.querySelector(`.r${item}`).classList.toggle("shadow-css");
+      document.querySelector(`.r${item}`).classList.toggle("text-[#def2f1]");
     } else {
       alert("please selcet form first one");
     }
@@ -73,22 +76,23 @@ const Component = () => {
   const navigator = useNavigate();
   useEffect(() => {
     if (Timer === 0) {
-
       navigator("/"); // Trigger navigation when the timer reaches 0
     }
   }, [Timer, navigator, dispatch]);
   useEffect(() => {
-    if ( array.length > 0 && array.length * 2 === document.querySelectorAll(".invisible").length) {
-      const a= async()=>{
-
-       await document.querySelectorAll(".invisible").forEach((item)=>{
-          item.classList.remove('invisible')
-          item.classList.add("text-transparent")
-        })
-        navigator("/")
-      console.log("navigated")
-
-      }
+    if (
+      array.length > 0 &&
+      array.length * 2 === document.querySelectorAll(".invisible").length
+    ) {
+      const a = async () => {
+        await document.querySelectorAll(".invisible").forEach((item) => {
+          item.classList.remove("invisible");
+          item.classList.add("text-transparent");
+          item.classList.remove("text-[#def2f1]");
+        });
+        navigator("/");
+        console.log("navigated");
+      };
       a();
     }
     if (firstval && secondval) {
@@ -96,13 +100,23 @@ const Component = () => {
         console.log("equal", "first", firstval, "second", secondval);
         dispatch(first(null));
         dispatch(second(null));
-        dispatch(updateScoreAction(20))
+        dispatch(updateScoreAction(20));
+        document.querySelector(`.t${firstval}`).classList.add("text-[#def2f1]");
+        document
+          .querySelector(`.r${secondval}`)
+          .classList.add("text-[#def2f1]");
         setTimeout(() => {
           document.querySelector(`.t${firstval}`).classList.add("invisible");
           document.querySelector(`.r${secondval}`).classList.add("invisible");
         }, 800);
       } else {
         setTimeout(() => {
+          document
+            .querySelector(`.t${firstval}`)
+            .classList.remove("text-[#def2f1]");
+          document
+            .querySelector(`.r${secondval}`)
+            .classList.remove("text-[#def2f1]");
           document
             .querySelector(`.t${firstval}`)
             .classList.add("text-transparent");
@@ -121,30 +135,53 @@ const Component = () => {
         dispatch(second(null));
       }
     }
-  }, [firstval, secondval,Timer, navigator, dispatch]);
+  }, [firstval, secondval, Timer, navigator, dispatch]);
   return (
     <>
-      <main className="grid grid-cols-6  gap-4 bg-slate-50 mb-5  select-none">
-        {array.map((item) => (
-          <div
-            key={item}
-            onClick={() => firstClick(item)}
-            className={`t${item} bg-slate-500 text-transparent rounded-full h-16 w-16 justify-center flex items-center`}
-          >
-            {item}
-          </div>
-        ))}
-      </main>
-      <div className="grid grid-cols-6 gap-8 bg-slate-100 ">
-        {array2.map((item) => (
-          <div
-            key={item}
-            onClick={() => secondclick(item)} // Pass a function that calls second with the item
-            className={`r${item} bg-slate-500 rounded-full h-16 w-16 justify-center text-transparent flex items-center`}
-          >
-            {item}
-          </div>
-        ))}
+      <div className="w-full font-extrabold  text-3xl h-12 flex uppercase  justify-evenly items-center bg-red-50">
+        <li
+          style={{
+            WebkitTextStroke: "1px",
+            WebkitTextStrokeColor: "#42ec4b7e",
+          }}
+          className="  inline  text-[#cc4f4fd0] "
+        >
+          red
+        </li>
+        <li
+          style={{
+            WebkitTextStroke: "1px",
+            WebkitTextStrokeColor: "#cc4f4fd0",
+          }}
+          className="  inline  text-[#42ec4b] "
+        >
+          green
+        </li>
+      </div>
+      <div style={{ height: "83%" }} className="flex  w-full flex-row">
+        <main className="grid outline-double outline-[#8e8d8a] grid-cols-3 sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-1 rounded-3xl bg-red-50 mb-5  select-none">
+          {array.map((item) => (
+            <div
+              key={item}
+              onClick={() => firstClick(item)}
+              className={`t${item} bg-[#e98074] p-4 rounded-full h-16 w-16 justify-center text-transparent flex items-center`}
+            >
+              {item}
+            </div>
+          ))}
+        </main>
+        <main className="grid grid-cols-3 outline-double p-4 outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-1 rounded-3xl bg-red-50 mb-5  select-none">
+          {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100 rounded-3xl ml-1"> */}
+          {array2.map((item) => (
+            <div
+              key={item}
+              onClick={() => secondclick(item)} // Pass a function that calls second with the item
+              className={`r${item} bg-[#e98074] rotate- rounded-full h-16 w-16 justify-center text-transparent flex items-center`}
+            >
+              {item}
+            </div>
+          ))}
+        </main>
       </div>
     </>
   );
