@@ -136,7 +136,7 @@ const Component = () => {
         ))}
       </main>
       <div className="grid grid-cols-6 gap-8 bg-slate-100 ">
-        {array.map((item) => (
+        {array2.map((item) => (
           <div
             key={item}
             onClick={() => secondclick(item)} // Pass a function that calls second with the item
