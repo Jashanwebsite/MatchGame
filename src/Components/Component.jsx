@@ -19,7 +19,7 @@ const Component = () => {
     const newArray = [];
     const newArray2 = [];
 
-    for (let index = 1; index <= 16; index++) {
+    for (let index = 1; index <= 15; index++) {
       newArray.push(index);
     }
     function shuffleArray(array) {
@@ -32,7 +32,7 @@ const Component = () => {
     }
     shuffleArray(newArray);
 
-    for (let index = 1; index <= 16; index++) {
+    for (let index = 1; index <= 15; index++) {
       newArray2.push(index);
     }
     function shuffleArray2(array) {
@@ -53,7 +53,7 @@ const Component = () => {
       document.querySelector(`.t${item}`).classList.toggle("shadow-css");
       document.querySelector(`.t${item}`).classList.add("text-[#def2f1]");
     } else {
-      alert("please selcet form second one");
+      alert("please selcet form rigth side");
     }
   };
   useEffect(() => {
@@ -70,7 +70,7 @@ const Component = () => {
       document.querySelector(`.r${item}`).classList.toggle("shadow-css");
       document.querySelector(`.r${item}`).classList.toggle("text-[#def2f1]");
     } else {
-      alert("please selcet form first one");
+      alert("please selcet form left side");
     }
   };
   const navigator = useNavigate();
@@ -146,7 +146,7 @@ const Component = () => {
           }}
           className="  inline  text-[#cc4f4fd0] "
         >
-          red
+          Left
         </li>
         <li
           style={{
@@ -155,28 +155,29 @@ const Component = () => {
           }}
           className="  inline  text-[#42ec4b] "
         >
-          green
+          right
         </li>
       </div>
       <div style={{ height: "83%" }} className="flex  w-full flex-row">
-        <main className="grid outline-double outline-[#8e8d8a] grid-cols-3 sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-1 rounded-3xl bg-red-50 mb-5  select-none">
+      <main className="grid grid-cols-3 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
+          {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100  ml-1"> */}
           {array.map((item) => (
             <div
               key={item}
-              onClick={() => firstClick(item)}
-              className={`t${item} bg-[#e98074] p-4 rounded-full h-16 w-16 justify-center text-transparent flex items-center`}
+              onClick={() => firstClick(item)} // Pass a function that calls second with the item
+              className={`t${item} bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
             >
               {item}
             </div>
           ))}
         </main>
-        <main className="grid grid-cols-3 outline-double p-4 outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-1 rounded-3xl bg-red-50 mb-5  select-none">
-          {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100 rounded-3xl ml-1"> */}
+        <main className="grid grid-cols-3 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
+          {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100  ml-1"> */}
           {array2.map((item) => (
             <div
               key={item}
               onClick={() => secondclick(item)} // Pass a function that calls second with the item
-              className={`r${item} bg-[#e98074] rotate- rounded-full h-16 w-16 justify-center text-transparent flex items-center`}
+              className={`r${item} bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
             >
               {item}
             </div>
