@@ -1,5 +1,57 @@
-.shadow-css {
-    box-shadow: 0px 0px 10px 0px rgba(112, 107, 107, 0.596);
-    background-color: green;
-    // border: 2px solid red;
+.Inder {
+  height: 100vh;
+  width: 100%;
+  background-image: url('your-background-image.jpg'); // Add your background image path
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  background-color: rgb(108, 121, 121);
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  // Blur effect for the background
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+    z-index: 1;
   }
+
+  .card {
+    height: 70%;
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .circle-image {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      
+      svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}

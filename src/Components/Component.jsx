@@ -19,7 +19,7 @@ const Component = () => {
     const newArray = [];
     const newArray2 = [];
 
-    for (let index = 1; index <= 15; index++) {
+    for (let index = 1; index <= 2; index++) {
       newArray.push(index);
     }
     function shuffleArray(array) {
@@ -32,7 +32,7 @@ const Component = () => {
     }
     shuffleArray(newArray);
 
-    for (let index = 1; index <= 15; index++) {
+    for (let index = 1; index <= 2; index++) {
       newArray2.push(index);
     }
     function shuffleArray2(array) {
@@ -51,6 +51,7 @@ const Component = () => {
       dispatch(first(item));
       document.querySelector(`.t${item}`).classList.toggle("text-transparent");
       document.querySelector(`.t${item}`).classList.toggle("shadow-css");
+      document.querySelector(`.t${item}`).classList.toggle("scale-110");
       document.querySelector(`.t${item}`).classList.add("text-[#def2f1]");
     } else {
       alert("please selcet form rigth side");
@@ -68,6 +69,7 @@ const Component = () => {
       // document.querySelector(`.r${item}`).classList.remove("text-transparent");
       document.querySelector(`.r${item}`).classList.toggle("text-transparent");
       document.querySelector(`.r${item}`).classList.toggle("shadow-css");
+      document.querySelector(`.r${item}`).classList.toggle("scale-110");
       document.querySelector(`.r${item}`).classList.toggle("text-[#def2f1]");
     } else {
       alert("please selcet form left side");
@@ -76,7 +78,7 @@ const Component = () => {
   const navigator = useNavigate();
   useEffect(() => {
     if (Timer === 0) {
-      navigator("/"); // Trigger navigation when the timer reaches 0
+      navigator("/Inder"); // Trigger navigation when the timer reaches 0
     }
   }, [Timer, navigator, dispatch]);
   useEffect(() => {
@@ -90,7 +92,7 @@ const Component = () => {
           item.classList.add("text-transparent");
           item.classList.remove("text-[#def2f1]");
         });
-        navigator("/");
+         navigator("/Inder");
         console.log("navigated");
       };
       a();
@@ -129,6 +131,8 @@ const Component = () => {
           document
             .querySelector(`.r${secondval}`)
             .classList.remove("shadow-css");
+          document.querySelector(`.r${secondval}`).classList.remove("scale-110");
+          document.querySelector(`.t${firstval}`).classList.remove("scale-110");
         }, 400);
         console.log("not equal");
         dispatch(first(null));
@@ -159,25 +163,25 @@ const Component = () => {
         </li>
       </div>
       <div style={{ height: "83%" }} className="flex  w-full flex-row">
-      <main className="grid grid-cols-3 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
+      <main className="grid grid-cols-2 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
           {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100  ml-1"> */}
           {array.map((item) => (
             <div
               key={item}
               onClick={() => firstClick(item)} // Pass a function that calls second with the item
-              className={`t${item} bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
+              className={`t${item} transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#5e3f3b]  bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
             >
               {item}
             </div>
           ))}
         </main>
-        <main className="grid grid-cols-3 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
+        <main className="grid grid-cols-2 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
           {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100  ml-1"> */}
           {array2.map((item) => (
             <div
               key={item}
               onClick={() => secondclick(item)} // Pass a function that calls second with the item
-              className={`r${item} bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
+              className={`r${item}  transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#5e3f3b]  bg-[#e98074] rotate- rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center text-transparent flex items-center`}
             >
               {item}
             </div>
