@@ -21,20 +21,19 @@ const Component = () => {
   const [matchedNumbers, setMatchedNumbers] = useState([]);
   const [gamePaused, setGamePaused] = useState(false);
 
-  // Initialize arrays and special number
+ useEffect(() => {
+  const numbers = [5, 6, 7, 8];
+  const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+  setSpecialNumber(randomNumber);
+  console.log("Special number set to:", randomNumber);
+}, []);
   useEffect(() => {
-    const newArray = Array.from({ length: 6 }, (_, i) => i + 1);
-    const newArray2 = Array.from({ length: 6 }, (_, i) => i + 1);
-
+    const newArray = Array.from({ length: 8 }, (_, i) => i + 1);
+    const newArray2 = Array.from({ length: 8 }, (_, i) => i + 1);
     const shuffledArray = [...newArray].sort(() => Math.random() - 0.5);
     const shuffledArray2 = [...newArray2].sort(() => Math.random() - 0.5);
-
     setArray(shuffledArray);
     setArray2(shuffledArray2);
-
-    const randomSpecial = Math.floor(Math.random() * 6) + 1;
-    setSpecialNumber(randomSpecial);
-    console.log("Special number:", randomSpecial);
   }, []);
 
   // Navigate when timer reaches 0
@@ -94,16 +93,12 @@ const Component = () => {
 
         // Add to matched numbers
         setMatchedNumbers((prev) => [...prev, firstval]);
+ 
 
         // Update score and reset selections
         dispatch(updateScoreAction(20));
 
         // Check if special number matched
-        if (firstval === specialNumber) {
-          console.log("Special number matched! Showing special div");
-          setShowCongrats(true);
-        }
-
         // Reset selections after delay
         setTimeout(() => {
           dispatch(first(null));
@@ -152,7 +147,11 @@ const Component = () => {
       return `${baseClasses} text-transparent`;
     }
   };
-
+  useEffect(()=>{
+           if(matchedNumbers.length == specialNumber){
+            setShowCongrats(true)
+           }
+  },[matchedNumbers])
   return (
     <>
       <div className="w-full font-extrabold text-3xl h-12 flex uppercase justify-evenly items-center bg-red-50">
