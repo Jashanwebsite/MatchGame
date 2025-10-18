@@ -27,7 +27,7 @@ const Component = () => {
     const newArray = [];
     const newArray2 = [];
 
-    for (let index = 1; index <= 2; index++) {
+    for (let index = 1; index <= 6; index++) {
       newArray.push(index);
     }
     function shuffleArray(array) {
@@ -40,7 +40,7 @@ const Component = () => {
     }
     shuffleArray(newArray);
 
-    for (let index = 1; index <= 2; index++) {
+    for (let index = 1; index <= 6; index++) {
       newArray2.push(index);
     }
     function shuffleArray2(array) {
