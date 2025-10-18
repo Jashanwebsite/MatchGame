@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import"../Components/cssfiles/Header.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { first, second, updateScoreAction } from "../state/action.js";
 import "../Components/cssfiles/Header.scss";
+import "../Components/download.jpg"
+import downloadImg from"../Components/Screenshot_20251018-133507 (1).png"
 import { Navigate, useNavigate } from "react-router-dom";
 import { updateTimerAction } from "../state/action.js";
 const Component = () => {
@@ -9,12 +12,17 @@ const Component = () => {
   const firstval = useSelector((state) => state.reducers.first);
   const Timer = useSelector((state) => state.reducers.Timer);
   const secondval = useSelector((state) => state.reducers.second);
-  // useEffect(() => {
-  //   console.log(reducer);
-  // }, [firstval, secondval, reducer]);
+  const [specialNumber, setSpecialNumber] = useState(null);
+  const [showYay, setshowyay] = useState(false);
+
   const [array, setArray] = useState([]);
   const [array2, setArray2] = useState([]);
   const [isMounted, setIsMounted] = useState(true);
+  const playSound = () => {
+    const sound = new Audio("/yay.mp3"); // ✅ from public folder
+    sound.volume = 0.7; // optional: adjust loudness
+    sound.play();
+  };
   useEffect(() => {
     const newArray = [];
     const newArray2 = [];
@@ -44,6 +52,9 @@ const Component = () => {
       setArray2(array);
     }
     shuffleArray2(newArray2);
+     const randomSpecial = Math.floor(Math.random() * newArray.length) + 1;
+  setSpecialNumber(randomSpecial);
+  console.log("Special number:", randomSpecial);
   }, []);
 
   const firstClick = (item) => {
@@ -92,7 +103,7 @@ const Component = () => {
           item.classList.add("text-transparent");
           item.classList.remove("text-[#def2f1]");
         });
-         navigator("/Inder");
+        //  navigator("/");
         console.log("navigated");
       };
       a();
@@ -110,6 +121,19 @@ const Component = () => {
         setTimeout(() => {
           document.querySelector(`.t${firstval}`).classList.add("invisible");
           document.querySelector(`.r${secondval}`).classList.add("invisible");
+         if (firstval === specialNumber) {
+  console.log("Special number matched! Showing special div");
+  const pfp = document.querySelector(".pfpcenter");
+  if (pfp) {
+    // pfp.classList.remove("hidden");
+    pfp.classList.remove("h-0", "w-0", "opacity-0");
+    pfp.classList.add("h-[300px]", "w-[300px]", "opacity-100");
+    pfp.classList.add("animate-ppf");
+
+    setshowyay(true)
+    playSound();
+  }
+}
         }, 800);
       } else {
         setTimeout(() => {
@@ -162,7 +186,29 @@ const Component = () => {
           right
         </li>
       </div>
-      <div style={{ height: "83%" }} className="flex  w-full flex-row">
+      {/* inderpratap com p start ----------------------------------------------------------------------- */}
+<div
+  className="pfpcenter  absolute 
+  top-[40%] left-[50%] translate-x-[-50%] translate-y-[-50%] 
+  border-4 border-zinc-700 rounded-full 
+  h-0 w-0 opacity-0
+   z-40
+  transition-all duration-70 ease-out 
+  flex justify-center items-center text-white text-2xl">
+    <img src={downloadImg} alt="no pfp" className="w-full justify-center items-center flex h-full rounded-full" />
+ </div>
+    {showYay && (
+        <p
+          className=" 
+           popup "
+          
+        >
+          🎉 you found golden inderpratap🎉
+        </p>
+      )}
+
+       {/*  game componet bottomm ------------------------------------------------------------------ */}
+     <div style={{ height: "83%" }} className="flex  w-full flex-row">
       <main className="grid grid-cols-2 outline-double p-4  outline-[#8e8d8a] sm:grid-cols-4  lg:grid-cols-5 lg  h-full w-1/2 gap-3  bg-red-50 mb-5  select-none">
           {/* <main className="grid grid-cols-6 gap-8 h-full w-1/2 bg-green-100  ml-1"> */}
           {array.map((item) => (
@@ -188,6 +234,7 @@ const Component = () => {
           ))}
         </main>
       </div>
+
     </>
   );
 };
