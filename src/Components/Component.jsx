@@ -22,7 +22,7 @@ const Component = () => {
   const [gamePaused, setGamePaused] = useState(false);
 
  useEffect(() => {
-  const numbers = [5, 6, 7, 8];
+  const numbers = [5,6,7];
   const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
   setSpecialNumber(randomNumber);
   console.log("Special number set to:", randomNumber);
@@ -63,8 +63,8 @@ const Component = () => {
 
         try {
           const pokemonAudio = new Audio(pokemonaudio);
-          pokemonAudio.volume = 0.6;
-          pokemonAudio.playbackRate = 1.5; // 1.5x speed (50% faster)
+          pokemonAudio.volume = 1;
+          pokemonAudio.playbackRate = 0.9; // 1.5x speed (50% faster)
           pokemonAudio
             .play()
             .catch((e) => console.log("Pokemon audio failed:", e));
@@ -134,7 +134,7 @@ const Component = () => {
   // Helper function to get tile classes
   const getTileClasses = (item, prefix) => {
     const baseClasses =
-      "transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#5e3f3b] bg-[#e98074] rounded-full h-12 w-12 sm:h-16 sm:w-16 justify-center flex items-center";
+      "transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-[#5e3f3b] bg-[#e98074] rounded-[10px] h-16 w-16 sm:h-18 sm:w-18 justify-center flex items-center";
 
     if (matchedNumbers.includes(item)) {
       return `${baseClasses} text-[#def2f1] invisible`;
@@ -142,7 +142,7 @@ const Component = () => {
       (prefix === "t" && firstval === item) ||
       (prefix === "r" && secondval === item)
     ) {
-      return `${baseClasses} text-[#def2f1] shadow-css scale-110`;
+      return `${baseClasses} text-[#def8f1] shadow-css scale-130`;
     } else {
       return `${baseClasses} text-transparent`;
     }
@@ -154,7 +154,7 @@ const Component = () => {
   },[matchedNumbers])
   return (
     <>
-      <div className="w-full font-extrabold text-3xl h-12 flex uppercase justify-evenly items-center bg-red-50">
+      <div className="w-full font-extrabold text-3xl h-12 flex uppercase justify-evenly items-center  bg-red-50">
         <li
           style={{
             WebkitTextStroke: "1px",
@@ -188,7 +188,7 @@ const Component = () => {
       <div style={{ height: "83%" }} className="flex w-full flex-row">
         {/* Left Grid */}
         <main
-          className={`grid grid-cols-2 outline-double p-4 outline-[#8e8d8a] sm:grid-cols-4 lg:grid-cols-5 h-full w-1/2 gap-3 bg-red-50 mb-5 select-none ${
+          className={`grid grid-cols-2 outline-double p-4 outline-[#8e8d8a] sm:grid-cols-4 lg:grid-cols-5 h-full w-1/2 gap-0 bg-red-50 mb-10 select-none ${
             gamePaused ? "opacity-50 pointer-events-none" : ""
           }`}
         >
@@ -240,29 +240,51 @@ const Component = () => {
         )}
 
         {/* Pokemon Card */}
-        {showPokemon && (
-          <div className="pokemon-overlay">
-            <div className="pokemon-container">
-              <div className="pokemon-card">
-                <div className="pokemon-shine"></div>
-                <div className="pokemon-glow"></div>
-                <img src={downloadImg} alt="Mewtwo" className="pokemon-image" />
-                <div className="pokemon-info">
-                  <h2 className="pokemon-name">INDERPARTAP</h2>
-                  <p className="pokemon-type">IP 3 attempt</p>
-                  <div className="pokemon-stats">
-                    <span className="pokemon-rarity">✨ Legendary</span>
-                  </div>
-                </div>
-                <div className="sparkles">
-                  {[...Array(6)].map((_, i) => (
-                    <div key={i} className="sparkle"></div>
-                  ))}
-                </div>
+       {showPokemon && (
+  <div className="pokemon-overlay select-none" >
+    <div className="pokemon-container">
+      <div className="pokemon-card">
+        <div className="pokemon-card-inner">
+          {/* Front Side - Profile Info */}
+          <div className="pokemon-card-front">
+            <div className="pokemon-shine"></div>
+            <div className="pokemon-glow"></div>
+            <img src={downloadImg} alt="Inderpartap" className="pokemon-image" />
+            <div className="pokemon-info">
+              <h2 className="pokemon-name">INDERPARTAP</h2>
+              <p className="pokemon-type"></p>
+              <div className="pokemon-stats">
+                <span className="pokemon-rarity">✨ LEGENDARY ✨</span>
+              </div>
+            </div>
+            <div className="sparkles">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="sparkle"></div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Back Side - Card Info */}
+          <div className="pokemon-card-back">
+            <div className="card-back-design">
+              <div className="pokemon-logo">INDER CARD</div>
+              <div className="card-back-title">SPECIAL EDITION</div>
+              <div className="card-back-rarity">✨ LEGENDARY ✨</div>
+              <div className="card-back-stats">
+                <div className="stat-item">LEVEL: 9999</div>
+                <div className="stat-item">ATTEMPTS: 3</div>
+                <div className="stat-item">STATUS: UNSTOPPABLE</div>
+              </div>
+              <div className="card-back-flavor">
+                "A rare person giving his 3rd ATTEMPT!"
               </div>
             </div>
           </div>
-        )}
+        </div>
+      </div>
+    </div>
+  </div>
+)}
       </div>
     </>
   );
