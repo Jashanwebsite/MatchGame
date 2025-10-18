@@ -22,8 +22,8 @@ const Component = () => {
 
   // Initialize arrays and special number
   useEffect(() => {
-    const newArray = Array.from({ length: 3 }, (_, i) => i + 1);
-    const newArray2 = Array.from({ length: 3 }, (_, i) => i + 1);
+    const newArray = Array.from({ length: 6 }, (_, i) => i + 1);
+    const newArray2 = Array.from({ length: 6 }, (_, i) => i + 1);
     
     const shuffledArray = [...newArray].sort(() => Math.random() - 0.5);
     const shuffledArray2 = [...newArray2].sort(() => Math.random() - 0.5);
@@ -31,7 +31,7 @@ const Component = () => {
     setArray(shuffledArray);
     setArray2(shuffledArray2);
     
-    const randomSpecial = Math.floor(Math.random() * 3) + 1;
+    const randomSpecial = Math.floor(Math.random() * 6) + 1;
     setSpecialNumber(randomSpecial);
     console.log("Special number:", randomSpecial);
   }, []);
