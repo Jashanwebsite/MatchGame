@@ -46,13 +46,13 @@ const Component = () => {
 
   // Handle special number sequence
   useEffect(() => {
+    const congAudio = new Audio(congratulationaudio);
+    congAudio.volume = 0.6;
+    congAudio.playbackRate = 1; // 1.5x speed (50% faster)
     if (showCongrats) {
       setGamePaused(true);
 
       try {
-        const congAudio = new Audio(congratulationaudio);
-        congAudio.volume = 0.6;
-        congAudio.playbackRate = 1; // 1.5x speed (50% faster)
         congAudio.play().catch((e) => console.log("Pokemon audio failed:", e));
       } catch (error) {
         console.log("Error playing pokemon audio:", error);
